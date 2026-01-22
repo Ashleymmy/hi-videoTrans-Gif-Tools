@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "video-to-gif"
+version = "0.1.0"
+description = "Local video-to-GIF converter using FFmpeg (palettegen/paletteuse)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Proprietary" }
+
+[project.scripts]
+video-to-gif = "video_to_gif.cli:main"
+video-to-gif-backend = "video_to_gif.api:main"
+video-to-gif-frontend = "video_to_gif_frontend.__main__:main"
+video-to-gif-webui = "video_to_gif.serve:main"
+
+[project.optional-dependencies]
+backend = [
+  "fastapi>=0.110",
+  "uvicorn>=0.27",
+  "python-multipart>=0.0.9",
+]
+frontend = [
+  "Django>=5.0",
+  "requests>=2.31",
+]
+webui = [
+  "fastapi>=0.110",
+  "uvicorn>=0.27",
+  "python-multipart>=0.0.9",
+  "Django>=5.0",
+  "requests>=2.31",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+video_to_gif_frontend = ["templates/*.html"]
